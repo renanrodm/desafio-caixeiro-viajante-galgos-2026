@@ -23,38 +23,39 @@ Arquivos principais:
 
 ## Como rodar o projeto (simples)
 
-### 1) Criar e ativar ambiente virtual
+Depois de clonar o repositorio, use apenas um comando:
 
 Windows (PowerShell):
 
 ```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
+.\run.ps1
+```
+
+Windows (CMD):
+
+```bat
+run.bat
 ```
 
 Linux/macOS:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+make run
 ```
 
-### 2) Instalar dependencias
+Os scripts criam o ambiente virtual (`.venv`), instalam as dependencias e executam `src/main.py`.
 
-```bash
-pip install -r requirements.txt
-```
+Se o PowerShell bloquear o script, rode:
 
-### 3) Executar
-
-```bash
-python src/main.py
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
 ## Dependencias
 
 - Python 3.10+
 - Pacotes em `requirements.txt` (principal: `tsplib95`)
+- `make` (somente para a opcao Linux/macOS com `make run`)
 
 ## Resultados obtidos
 
@@ -87,5 +88,6 @@ Usei IA generativa como apoio para:
 - revisar estrutura e clareza do README;
 - discutir apresentacao da heuristica;
 - revisar texto e organizacao da documentacao.
+- escrever os scripts de execucao (`run.ps1`, `run.bat` e `Makefile`), pois eu nao tinha conhecimento previo especifico para montar esses arquivos.
 
 A implementacao do algoritmo, validacao da execucao e interpretacao dos resultados foram feitas manualmente.
