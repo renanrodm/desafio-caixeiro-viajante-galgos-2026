@@ -1,163 +1,91 @@
-# Desafio – Problema do Caixeiro Viajante (TSP)
+# Desafio: Problema do Caixeiro Viajante (TSP)
 
-## Descrição do problema
+## Descricao do problema
 
-O Problema do Caixeiro Viajante (Travelling Salesman Problem – TSP) consiste em encontrar a rota de menor custo que visita um conjunto de cidades exatamente uma vez e retorna à cidade inicial.
+O Problema do Caixeiro Viajante (TSP) busca a rota de menor custo que visita cada cidade exatamente uma vez e retorna para a cidade inicial.
 
-Formalmente, dado um conjunto de cidades e os custos de deslocamento entre cada par de cidades, o objetivo é determinar um ciclo Hamiltoniano de custo mínimo.
-
-Neste projeto utilizamos a instância **brazil58** da biblioteca **TSPLIB**, composta por **58 cidades** e uma matriz explícita de custos entre os nós.
-
----
+Neste projeto, a instancia usada e `brazil58` (TSPLIB), com 58 cidades.
 
 ## Abordagem adotada
 
-A solução implementada utiliza a heurística **Vizinho Mais Próximo (Nearest Neighbor)**.
+A solucao implementa a heuristica **Vizinho Mais Proximo**:
 
-Essa heurística é um algoritmo guloso que constrói a rota iterativamente:
+1. Comeca em uma cidade inicial (atualmente `1`).
+2. Escolhe a cidade nao visitada com menor custo a partir da cidade atual.
+3. Repete ate visitar todas as cidades.
+4. Retorna para a cidade inicial.
 
-1. Escolhe uma cidade inicial.
-2. Entre todas as cidades ainda não visitadas, seleciona a cidade com menor custo de deslocamento a partir da cidade atual.
-3. Atualiza a rota e marca a cidade como visitada.
-4. Repete o processo até visitar todas as cidades.
-5. Ao final, retorna à cidade inicial para fechar o ciclo.
+Arquivos principais:
 
----
+- `src/main.py`: execucao do programa e calculo do gap para o otimo conhecido.
+- `src/parser.py`: leitura da instancia `.tsp` com `tsplib95`.
+- `src/heuristics.py`: implementacao da heuristica.
 
-## Estrutura do projeto
+## Como rodar o projeto (simples)
 
-```
-.
-├── data/
-│   └── raw/
-│       └── brazil58.tsp
-├── src/
-│   ├── parser.py
-│   ├── heuristics.py
-│   └── main.py
-├── README.md
-├── requirements.txt
-└── .gitignore
+### 1) Criar e ativar ambiente virtual
+
+Windows (PowerShell):
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 ```
 
-### parser.py
-
-Responsável por carregar a instância TSPLib e retornar um dicionário com as informações necessárias para o algoritmo.
-
-### heuristics.py
-
-Contém a implementação da heurística **vizinho mais próximo**, responsável por construir a rota e calcular seu custo.
-
-### main.py
-
-Arquivo responsável por executar o programa, calcular métricas e exibir os resultados.
-
----
-
-## Dependências
-
-O projeto utiliza as seguintes bibliotecas:
-
-- Python 3.10+
-- tsplib95
-
-Instalação das dependências:
+Linux/macOS:
 
 ```bash
-pip install tsplib95
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
----
-
-## Como rodar o projeto
-
-Clone o repositório:
-
-```bash
-git clone <url-do-repositorio>
-cd desafio-caixeiro-viajante
-```
-
-Crie um ambiente virtual (opcional, mas recomendado):
-
-```bash
-python -m venv venv
-```
-
-Ative o ambiente virtual.
-
-### Linux / Mac
-
-```bash
-source venv/bin/activate
-```
-
-### Windows
-
-```bash
-venv\Scripts\activate
-```
-
-Instale as dependências:
+### 2) Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Execute o projeto:
+### 3) Executar
 
 ```bash
 python src/main.py
 ```
 
----
+## Dependencias
+
+- Python 3.10+
+- Pacotes em `requirements.txt` (principal: `tsplib95`)
 
 ## Resultados obtidos
 
-Executando o algoritmo com a cidade inicial **1**, obtivemos:
+Resultado de execucao com cidade inicial `1`:
 
-| Instância | Método | Cidade inicial | Custo obtido |
-|----------|-------|---------------|-------------|
-| brazil58 | Vizinho mais próximo | 1 | 28429 |
+- Instancia: `brazil58`
+- Numero de cidades: `58`
+- Custo total encontrado: `28429`
+- Custo otimo conhecido: `25395`
+- Gap: `11.95%`
+- Tamanho da rota (com retorno): `59`
 
-O valor ótimo conhecido para a instância **brazil58** é:
+## Discussao sobre limitacoes e possiveis melhorias
 
-```
-25395
-```
+Limitacoes:
 
-Diferença percentual aproximada:
+- O resultado depende da cidade inicial.
+- A heuristica e gulosa e pode ficar longe do otimo global.
+- Nao ha etapa de refinamento da rota apos a construcao inicial.
 
-```
-≈ 11.95%
-```
+Possiveis melhorias:
 
----
-
-## Uso de Inteligência Artificial
-
-Ferramentas de Inteligência Artificial foram utilizadas como **apoio ao desenvolvimento do projeto**, principalmente para:
-
-- esclarecimento de conceitos relacionados ao Problema do Caixeiro Viajante (TSP);
-- discussão de estratégias de implementação da heurística do **Vizinho Mais Próximo**;
-- auxílio na organização da estrutura do projeto;
-- revisão e melhoria da documentação do README.
-
-A implementação do algoritmo, entendimento do funcionamento da heurística e validação dos resultados foram realizados manualmente, garantindo compreensão completa da solução proposta.
-
-A IA foi utilizada como **ferramenta de suporte**, semelhante à consulta de documentação técnica ou materiais de estudo.
-
-## Discussão sobre limitações
-
-A heurística do vizinho mais próximo possui algumas limitações:
-
-- O resultado depende da **cidade inicial escolhida**.
-- O algoritmo faz decisões **locais**, o que pode levar a soluções subótimas.
-- Não possui mecanismo de melhoria posterior da rota.
-
-Mesmo assim, o método é útil como solução inicial ou como base para heurísticas mais avançadas.
+- Testar multiplas cidades iniciais e escolher o melhor resultado.
 
 
-## Referências
+## Uso de IA generativa
 
-- TSPLIB: http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
+Usei IA generativa como apoio para:
+
+- revisar estrutura e clareza do README;
+- discutir apresentacao da heuristica;
+- revisar texto e organizacao da documentacao.
+
+A implementacao do algoritmo, validacao da execucao e interpretacao dos resultados foram feitas manualmente.
