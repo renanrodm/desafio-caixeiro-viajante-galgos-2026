@@ -134,6 +134,19 @@ Diferença percentual aproximada:
 
 ---
 
+## Uso de Inteligência Artificial
+
+Ferramentas de Inteligência Artificial foram utilizadas como **apoio ao desenvolvimento do projeto**, principalmente para:
+
+- esclarecimento de conceitos relacionados ao Problema do Caixeiro Viajante (TSP);
+- discussão de estratégias de implementação da heurística do **Vizinho Mais Próximo**;
+- auxílio na organização da estrutura do projeto;
+- revisão e melhoria da documentação do README.
+
+A implementação do algoritmo, entendimento do funcionamento da heurística e validação dos resultados foram realizados manualmente, garantindo compreensão completa da solução proposta.
+
+A IA foi utilizada como **ferramenta de suporte**, semelhante à consulta de documentação técnica ou materiais de estudo.
+
 ## Discussão sobre limitações
 
 A heurística do vizinho mais próximo possui algumas limitações:
